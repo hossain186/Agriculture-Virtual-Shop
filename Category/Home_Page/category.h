@@ -1,0 +1,9 @@
+
+#ifndef AGRICULTURE_VIRTUAL_SHOP_CATEGORY_H
+#define AGRICULTURE_VIRTUAL_SHOP_CATEGORY_H
+
+void displayAllCategory();
+void chooseCategory();
+
+
+#endif //AGRICULTURE_VIRTUAL_SHOP_CATEGORY_H
