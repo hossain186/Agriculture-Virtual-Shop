@@ -3,19 +3,24 @@
 #include "string.h"
 #include "../../Home/home.h"
 #include"../Seeds/Paddy Seeds/paddy.h"
+#include "../Seeds/All_Seeds/all seeds.h"
+#include "../Machinery/All_machine/all_mechine.h"
+#include "../Medicine/All_Medicine/All_medicine.h"
 
 void displayAllCategory(){
 
-    char categories[][100] = {"Seeds", "Livestock", "Fisheries", "Agrochemicals", "Equipment"};
+    char categories[][100] = {"Seeds", "Livestock", "Fisheries", "Agrochemicals", "Machinery"};
 
     int getSize = sizeof(categories)/ sizeof(categories[0]);
-
+    printf("************** Categories **************\n");
     for(int i = 0; i< getSize; i++){
 
-        printf("%d. %s\n",i+1, categories[i] );
+        printf("         %d. %s\n",i+1, categories[i] );
 
 
     }
+
+    chooseCategory();// from-> this;
 
 
 }
@@ -30,29 +35,34 @@ void chooseCategory(){
     int liverStock = !strcmp(userAns, "livestock");
     int fisheries = !strcmp(userAns, "fisheries");
     int agrochemical = !strcmp(userAns, "agrochemicals");
-    int equipment = !strcmp(userAns, "equipment");
+    int machine = !strcmp(userAns, "machinery");
+    int back = !strcmp(userAns, "back");
 
-    if(seed){
+    if(back){
 
-        printf("seeds");
+        displayHeader();// from-> Home/home.c
+    }else if(seed){
+
+        showAllTypeOfSeeds();// from-> seeds/all_seeds/all seeds.c
 
     }else if(liverStock){
         printf("all livestock\n");
     }else if(agrochemical){
 
-        printf("all agrochemical\n");
+        showAllMedicine();// from-> medicine/All_medicine/All_medicine.c
     }else if(fisheries){
 
         printf("fisheries\n");
 
-    }else if(equipment){
+    }else if(machine){
 
-        printf("all equipment \n");
+        showAllTypesOfMachine();//from->Machinery/All_machine
+
 
     }else{
 
         printf("enter valid category!\n\n");
-        chooseCategory();
+        chooseCategory();// call itself
 
     }
 

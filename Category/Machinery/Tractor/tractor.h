@@ -1,0 +1,12 @@
+
+
+#ifndef AGRICULTURE_VIRTUAL_SHOP_TRACTOR_H
+#define AGRICULTURE_VIRTUAL_SHOP_TRACTOR_H
+
+void showAllTractor();
+void chooseTractor();
+
+
+
+
+#endif //AGRICULTURE_VIRTUAL_SHOP_TRACTOR_H

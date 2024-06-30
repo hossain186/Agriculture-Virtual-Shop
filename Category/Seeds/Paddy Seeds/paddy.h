@@ -13,7 +13,8 @@ typedef  struct{
 }seeds;
 
 
-seeds *allSeeds();
-void show_seeds();
+void showAllPaddy();
+void choosePaddy();
+void goBack();
 
 #endif //AGRICULTURE_VIRTUAL_SHOP_PADDY_H

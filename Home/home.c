@@ -3,7 +3,7 @@
 #include "home.h"
 #include<string.h>
 
-#include "../Category/Home_Page/category.h"
+#include "../Category/All_category//category.h"
 // show display
 void displayHeader(){
 
@@ -18,7 +18,7 @@ void displayHeader(){
     }
     printf("\n\n");
 
-    chooseService();
+    chooseService();// from->this
 
 }
 
@@ -42,7 +42,7 @@ void chooseService() {
 
     char userAnswer[100];
     scanf("%s", userAnswer);
-    lineBreak();
+    lineBreak();// from->this;
 
     //"Home", "Category","Cart", "About", "Register/Login","Profile"
     int compareWithCategory = !strcmp(userAnswer, "category");
@@ -56,18 +56,19 @@ void chooseService() {
 
     if(compareWithHome){
 
-        displayHeader();
+        displayHeader();// from->this
     }else if(compareWithCategory){
 
-        displayAllCategory();
-        chooseCategory();
+        displayAllCategory();// from Category/All_category/category.c
+
 
     }else if(compareWithAbout){
 
         printf("This online shop provide sealing service of all agricultural product\n\n");
     }
     else{
-        printf("Enter Valid Service!");
+        printf("Enter Valid Service!\n");
+        chooseService();
 
     }
 
