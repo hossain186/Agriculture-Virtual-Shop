@@ -19,7 +19,7 @@ void showAllTypeOfSeeds(){
     printf("************** Seeds **************\n");
     for(int i =0; i< n;i++){
 
-        printf("        %d. %s\n", i+1, typeOfseeds[i]);
+        printf("        %c. %s\n", 'A'+i, typeOfseeds[i]);
 
     }
 
@@ -37,26 +37,28 @@ void chooseTypeOfseed(){
 
     toLower(seedName);// from->Home/home.c
 
+    int userInd = (int)seedName[0] - (int )'a';
+
     int back = !strcmp(seedName, "back");
-    int paddy = !strcmp(seedName, "paddy");
-    int Nut = !strcmp(seedName, "nut");
-    int legume = !strcmp(seedName, "legume");
+    int paddy = userInd ==0;
+    int Nut = userInd == 1;
+    int legume = userInd ==2;
 
     if(back){
 
         displayAllCategory();// from-> All_category/category.c
 
-    }else if(paddy){
+    }else if(paddy && strlen(seedName) ==1){
 
         showAllPaddy();// from->Paddy seeds/ paddy.c
 
 
 
-    }else if(Nut){
+    }else if(Nut && strlen(seedName) ==1){
 
         showAllNut();// from -> Seeds/Nut/ nut.c
 
-    }else if (legume){
+    }else if (legume && strlen(seedName) ==1){
         showAllLegume();
 
     }

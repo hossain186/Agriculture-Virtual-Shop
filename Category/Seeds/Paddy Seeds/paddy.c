@@ -4,6 +4,7 @@
 #include "string.h"
 #include "../All_Seeds/all seeds.h"
 #include"../../../Cart/Add to cart/cart.h"
+#include"../../../Home/home.h"
 
 seeds paddy[6];
 void showAllPaddy(){
@@ -33,7 +34,7 @@ void showAllPaddy(){
 
     for(int i =0; i< 6; i++){
 
-        printf("        %s(%dtk)  ",paddy[i].name, paddy[i].price);
+        printf("        %c.%s(%dtk)  ",'A'+i,paddy[i].name, paddy[i].price);
         if(i == 2){
 
             printf("\n");
@@ -52,6 +53,7 @@ void choosePaddy() {
     printf("Add to cart(back): ");
     char userAns[20];
     scanf("%s", userAns);
+    toLower(userAns);
 
     int back = !strcmp(userAns, "back");
     int cart = !strcmp(userAns, "cart");
@@ -70,24 +72,17 @@ void choosePaddy() {
         char productname[20];
         int productPrice;
 
-        int findItem = 0;
 
-        for(int i = 0; i< 6; i++){
 
-            int cmp = !strcmp(paddy[i].name , userAns);
+        int startInd = (int)'a';
+        int endInd  = (int)'f';
+        int userChossenInd = (int)userAns[0];
+        int productInd = userChossenInd-startInd;
 
-            if(cmp){
-                productPrice = paddy[i].price;
-                strcpy(productname, paddy[i].name);
+        if (userChossenInd<=endInd && strlen(userAns) ==1) {
 
-                findItem = 1;
-                break;
-
-            }
-
-        }
-
-        if (findItem) {
+            strcpy(productname, paddy[productInd].name);
+            productPrice = paddy[productInd].price;
 
             int added = addItemToCart(productname, productPrice);
             if (added) {

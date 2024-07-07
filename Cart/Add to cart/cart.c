@@ -3,8 +3,6 @@
 #include<stdio.h>
 #include<string.h>
 
-
-
 int addItemToCart(char itemName[], int itemPrice) {
     int totalCartItem = 0;
     int totalPrice = 0;
@@ -89,17 +87,15 @@ void showAllCartItems(){
     int cnt = 0;
     char word[50];
     while (fscanf(allItem, "%s", word) != EOF) {
-       printf("%s ", word);
+       printf("%s     ", word);
        cnt++;
-       if(cnt%9 ==0){
+       if(cnt%3 ==0){
            printf("\n");
 
        }
     }
 
     fclose(allItem);
-
-
 
 
 

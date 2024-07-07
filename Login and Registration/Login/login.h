@@ -1,0 +1,9 @@
+
+
+#ifndef AGRICULTURE_VIRTUAL_SHOP_LOGIN_H
+#define AGRICULTURE_VIRTUAL_SHOP_LOGIN_H
+
+void loginPage();
+void accountNotFound();
+
+#endif //AGRICULTURE_VIRTUAL_SHOP_LOGIN_H

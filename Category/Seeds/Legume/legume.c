@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "../All_Seeds/all seeds.h"
 #include "../../../Cart/Add to cart/cart.h"
+#include"../../../Home/home.h"
 
 static Legume allLegume[6];
 void showAllLegume(){
@@ -35,7 +36,7 @@ void showAllLegume(){
 
     for(int i =0; i< 6; i++){
 
-        printf("        %s(%dtk)-kg  ", allLegume[i].name, allLegume[i].price);
+        printf("        %c.%s(%dtk)-kg  ",'A'+i, allLegume[i].name, allLegume[i].price);
         if(i ==2){
 
             printf("\n");
@@ -59,7 +60,7 @@ void chooseLegume(){
     printf("Select product/back: ");
     char userAns[100];
     scanf("%s",userAns);
-
+    toLower(userAns);
     int back = !strcmp(userAns, "back");
     int cart = !strcmp(userAns, "cart");
 
@@ -69,7 +70,6 @@ void chooseLegume(){
 
         showAllTypeOfSeeds();// from->this
 
-
     } else if (cart) {
         showAllCartItems();//from-> Cast/add to cart
     } else {
@@ -77,25 +77,14 @@ void chooseLegume(){
         char productname[20];
         int productPrice;
 
-        int findItem = 0;
+        int startInd = (int)'a';
+        int endInd  = (int)'f';
+        int userChossenInd = (int)userAns[0];
+        int productInd = userChossenInd-startInd;
 
-        for(int i = 0; i< 6; i++){
-
-            int cmp = !strcmp(allLegume[i].name, userAns);
-
-            if(cmp){
-                productPrice = allLegume[i].price;
-                strcpy(productname, allLegume[i].name);
-
-                findItem = 1;
-                break;
-
-            }
-
-        }
-
-        if (findItem) {
-
+        if (endInd>=userChossenInd && strlen(userAns) ==1) {
+            strcpy(productname, allLegume[productInd].name);
+            productPrice = allLegume[productInd].price;
             int added = addItemToCart(productname, productPrice);
             if (added) {
 

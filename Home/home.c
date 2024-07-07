@@ -4,19 +4,21 @@
 #include<string.h>
 #include "../Category/All_category//category.h"
 #include"../Cart/Add to cart/cart.h"
+#include"../Login and Registration/Registration/registration.h"
+#include"../Login and Registration/Login/login.h"
 // show display
 void displayHeader(){
 
     char header[][100] = {"Home", "Category","Cart", "About", "Register/Login","Profile"};
 
     int headerSize = sizeof(header)/sizeof(header[0]);// number of element
-
+    printf("********************* Home ********************\n");
     for(int i =0; i< headerSize; i++){
 
         printf("%s ",header[i]);
 
     }
-    printf("\n\n");
+    printf("\n");
 
     chooseService();// from->this
 
@@ -67,6 +69,12 @@ void chooseService() {
         printf("This online shop provide sealing service of all agricultural product\n\n");
     } else if(compareWithCart){
         showAllCartItems();// from-> Cart/Add to cart/ cart.h
+    }else if (compareWithRegister){
+        registrationPage();
+    }else if(compareWithLogin){
+
+        loginPage();
+
     }
     else{
         printf("Enter Valid Service!\n");

@@ -5,8 +5,16 @@
 #ifndef AGRICULTURE_VIRTUAL_SHOP_PESTICIDES_H
 #define AGRICULTURE_VIRTUAL_SHOP_PESTICIDES_H
 
+typedef struct {
+    char name[100];
+    int price ;
+
+}Pesticide;
+
+
+
 void showAllPesticides();
-void choosePesticides();
+void choosePesticide();
 
 
 #endif //AGRICULTURE_VIRTUAL_SHOP_PESTICIDES_H

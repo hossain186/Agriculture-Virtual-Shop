@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include"../../../Cart/Add to cart/cart.h"
 #include "../All_Medicine/All_medicine.h"
+#include"../../../Home/home.h"
 
 
 
@@ -26,7 +27,7 @@ void showALlFertilizer() {
 
     printf("********* Fertilizers *********\n");
     for (int i = 0; i < 6; i++) {
-        printf("%d. %s(%dtk)\n", i + 1, allFertilizers[i].name, allFertilizers[i].price);
+        printf("      %c. %s(%dtk)\n", 'A'+i, allFertilizers[i].name, allFertilizers[i].price);
         if ((i + 1) % 3 == 0 && i != 5) {
             printf("\n");
         }
@@ -42,6 +43,7 @@ void chooseFertilizer() {
     printf("Add to cart (back): ");
     char userAns[20];
     scanf("%s", userAns);
+    toLower(userAns);
 
     int back = !strcmp(userAns, "back");
     int cart = !strcmp(userAns, "cart");
@@ -53,18 +55,20 @@ void chooseFertilizer() {
     } else {
         char productName[100];
         int productPrice;
-        int foundItem = 0;
 
-        for (int i = 0; i < 6; i++) {
-            if (!strcmp(allFertilizers[i].name, userAns)) {
-                productPrice = allFertilizers[i].price;
-                strcpy(productName, allFertilizers[i].name);
-                foundItem = 1;
-                break;
-            }
-        }
+        int startInd = (int)'a';
+        int endInd = (int)'f';
+        int userInd = (int)userAns[0];
 
-        if (foundItem) {
+
+
+
+
+        if (userInd<=endInd && strlen(userAns) ==1) {
+
+            strcpy(productName , allFertilizers[userInd-startInd].name);
+            productPrice = allFertilizers[userInd-startInd].price;
+
             int added = addItemToCart(productName, productPrice);
             if (added) {
                 printf("Added item successfully.\n");

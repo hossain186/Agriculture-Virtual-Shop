@@ -6,28 +6,28 @@
 #include "../All_Seeds/all seeds.h"
 #include"../../../Cart/Add to cart/cart.h"
 
-static nuts allLegume[6];
+static nuts allNuts[6];
 void showAllNut(){
 
 
 
-    strcpy(allLegume[0].name, "Almond");
-    allLegume[0].price = 1200;
+    strcpy(allNuts[0].name, "Almond");
+    allNuts[0].price = 1200;
 
-    strcpy(allLegume[1].name, "Cashew");
-    allLegume[1].price = 1499;
+    strcpy(allNuts[1].name, "Cashew");
+    allNuts[1].price = 1499;
 
-    strcpy(allLegume[2].name, "Pistachio");
-    allLegume[2].price = 999;
+    strcpy(allNuts[2].name, "Pistachio");
+    allNuts[2].price = 999;
 
-    strcpy(allLegume[3].name, "Peanut");
-    allLegume[3].price = 600;
+    strcpy(allNuts[3].name, "Peanut");
+    allNuts[3].price = 600;
 
-    strcpy(allLegume[4].name, "Cacao_bob");
-    allLegume[4].price = 4000;
+    strcpy(allNuts[4].name, "Cacao_bob");
+    allNuts[4].price = 4000;
 
-    strcpy(allLegume[5].name, "Macadamia");
-    allLegume[5].price = 1199;
+    strcpy(allNuts[5].name, "Macadamia");
+    allNuts[5].price = 1199;
 
 
     // show all nuts
@@ -36,7 +36,7 @@ void showAllNut(){
 
     for(int i =0; i< 6; i++){
 
-        printf("        %s(%dtk)  ", allLegume[i].name, allLegume[i].price);
+        printf("        %c.%s(%dtk)  ",'A'+i,allNuts[i].name, allNuts[i].price);
         if(i ==2){
 
             printf("\n");
@@ -61,6 +61,7 @@ void chooseNut(){
     char userAns[100];
     scanf("%s",userAns);
 
+    toLower(userAns);
     int back = !strcmp(userAns, "back");
     int cart = !strcmp(userAns, "cart");
 
@@ -78,24 +79,17 @@ void chooseNut(){
         char productname[20];
         int productPrice;
 
-        int findItem = 0;
 
-        for(int i = 0; i< 6; i++){
 
-            int cmp = !strcmp(allLegume[i].name, userAns);
+        int startInd = (int)'a';
+        int endInd  = (int)'f';
+        int userChossenInd = (int)userAns[0];
+        int productInd = userChossenInd-startInd;
 
-            if(cmp){
-                productPrice = allLegume[i].price;
-                strcpy(productname, allLegume[i].name);
+        if (endInd>=userChossenInd && strlen(userAns) ==1) {
+            strcpy(productname,allNuts[productInd].name);
 
-                findItem = 1;
-                break;
-
-            }
-
-        }
-
-        if (findItem) {
+            productPrice = allNuts[productInd].price;
 
             int added = addItemToCart(productname, productPrice);
             if (added) {
