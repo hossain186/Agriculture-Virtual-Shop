@@ -48,9 +48,7 @@ void choosePesticides(){
 
     }else{
         printf("Enter valid type of medicine!\n");
-        chooseMedicine();
+        chooseMedicine();//
     }
-
-
 
 }

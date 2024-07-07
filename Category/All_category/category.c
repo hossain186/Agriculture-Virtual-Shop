@@ -17,7 +17,6 @@ void displayAllCategory(){
 
         printf("         %d. %s\n",i+1, categories[i] );
 
-
     }
 
     chooseCategory();// from-> this;
@@ -27,9 +26,10 @@ void displayAllCategory(){
 void chooseCategory(){
 
     char userAns[100];
-    printf("Select Category: ");
+    printf("Select Category/back: ");
     scanf("%s", userAns);
     toLower(userAns);// keep lower
+
 
     int seed = !strcmp(userAns, "seeds");
     int liverStock = !strcmp(userAns, "livestock");

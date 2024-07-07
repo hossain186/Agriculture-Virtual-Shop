@@ -8,10 +8,11 @@
 #include"../../../Home/home.h"
 #include "../../All_category/category.h"
 #include "../Pesticides/Pesticides.h"
+#include "../Fertilizers/fertilizer.h"
 
 void showAllMedicine(){
 
-    char allMedicine[][100] ={"Pesticides","Fertilizers", "Growth Regulators"};
+    char allMedicine[3][100] ={"Pesticides","Fertilizers", "Growth Regulators"};
 
     printf("******* ALL Medicine *******\n");
 
@@ -35,6 +36,7 @@ void chooseMedicine(){
 
     int back = !strcmp(userAns, "back");
     int Pesticides = !strcmp(userAns, "pesticides");
+    int fertilizer = !strcmp(userAns, "fertilizers");
 
     if(back){
 
@@ -44,11 +46,13 @@ void chooseMedicine(){
 
         showAllPesticides();// from medicine/Pesticides/pesticides.c
 
+    }else if(fertilizer) {
+        showALlFertilizer();
     }else{
-        printf("Enter valid type of medicine!\n");
-        chooseMedicine();
+            printf("Enter valid type of medicine!\n");
+            chooseMedicine();
     }
-
-
-
 }
+
+
+

@@ -6,8 +6,8 @@
 #include "../../../Home/home.h"
 #include "../Paddy Seeds/paddy.h"
 #include "../../All_category/category.h"
-
 #include"../Nut/Nut.h"
+#include "../Legume/legume.h"
 
 
 void showAllTypeOfSeeds(){
@@ -44,11 +44,11 @@ void chooseTypeOfseed(){
 
     if(back){
 
-        displayAllCategory();// from-> All_category/category
+        displayAllCategory();// from-> All_category/category.c
 
     }else if(paddy){
 
-        showAllPaddy();// from->paddy seeds/ paddy.c
+        showAllPaddy();// from->Paddy seeds/ paddy.c
 
 
 
@@ -56,7 +56,12 @@ void chooseTypeOfseed(){
 
         showAllNut();// from -> Seeds/Nut/ nut.c
 
-    }else{
+    }else if (legume){
+        showAllLegume();
+
+    }
+
+    else{
 
         printf("enter Valid seed!\n");
         chooseTypeOfseed();// call itself

@@ -8,7 +8,7 @@
 
 void showAllTypesOfMachine(){
 
-    const char machineTypes[][50] = {
+     char machineTypes[][50] = {
             "Tractors",
             "Power Tiller",
             "Water Pump"
@@ -22,7 +22,7 @@ void showAllTypesOfMachine(){
         printf("%d. %s\n",i+1, machineTypes[i]);
     }
 
-    chooseMachine();
+    chooseMachine();// from-> this
 
 }
 
@@ -34,8 +34,8 @@ void chooseMachine(){
     scanf("%s", userAns);
     toLower(userAns);// from-> Home/ home.c
 
-    int back = !strcmp(userAns,"back");
-    int tracktor = !strcmp(userAns,"tractors");
+    int back = !strcmp(userAns,"back");// if user wanna go back
+    int tracktor = !strcmp(userAns,"tractors");//
 
     if(back){
         displayAllCategory();// from -> Category/All_category/category.c

@@ -1,33 +1,32 @@
 
-#include "Nut.h"
-#include"string.h"
-#include<stdio.h>
-#include "../../../Home/home.h"
+#include "legume.h"
+#include <string.h>
+#include <stdio.h>
 #include "../All_Seeds/all seeds.h"
-#include"../../../Cart/Add to cart/cart.h"
+#include "../../../Cart/Add to cart/cart.h"
 
-static nuts allLegume[6];
-void showAllNut(){
+static Legume allLegume[6];
+void showAllLegume(){
 
 
 
-    strcpy(allLegume[0].name, "Almond");
-    allLegume[0].price = 1200;
+    strcpy(allLegume[0].name, "Cannellini");
+    allLegume[0].price = 120;
 
-    strcpy(allLegume[1].name, "Cashew");
-    allLegume[1].price = 1499;
+    strcpy(allLegume[1].name, "Chickpeas");
+    allLegume[1].price = 210;
 
-    strcpy(allLegume[2].name, "Pistachio");
-    allLegume[2].price = 999;
+    strcpy(allLegume[2].name, "Red_Bean");
+    allLegume[2].price = 300;
 
-    strcpy(allLegume[3].name, "Peanut");
-    allLegume[3].price = 600;
+    strcpy(allLegume[3].name, "Pinto");
+    allLegume[3].price = 499;
 
-    strcpy(allLegume[4].name, "Cacao_bob");
-    allLegume[4].price = 4000;
+    strcpy(allLegume[4].name, "Soybean");
+    allLegume[4].price = 125;
 
-    strcpy(allLegume[5].name, "Macadamia");
-    allLegume[5].price = 1199;
+    strcpy(allLegume[5].name, "Borlotti");
+    allLegume[5].price = 321;
 
 
     // show all nuts
@@ -36,7 +35,7 @@ void showAllNut(){
 
     for(int i =0; i< 6; i++){
 
-        printf("        %s(%dtk)  ", allLegume[i].name, allLegume[i].price);
+        printf("        %s(%dtk)-kg  ", allLegume[i].name, allLegume[i].price);
         if(i ==2){
 
             printf("\n");
@@ -47,7 +46,7 @@ void showAllNut(){
 
     printf("\n");
 
-    chooseNut();// form-> this
+    chooseLegume();// form-> this
 
 
 
@@ -55,7 +54,7 @@ void showAllNut(){
 }
 
 
-void chooseNut(){
+void chooseLegume(){
 
     printf("Select product/back: ");
     char userAns[100];
@@ -104,14 +103,13 @@ void chooseNut(){
             } else {
                 printf("Your cart is full!.Delete checkout or delete few item.\n");
             }
-            chooseNut();
-
+            chooseLegume();
 
         }
         else{
 
             printf("Item not found!");
-            chooseNut();
+            chooseLegume();
 
         }
     }
@@ -119,3 +117,6 @@ void chooseNut(){
 
 
 }
+
+
+

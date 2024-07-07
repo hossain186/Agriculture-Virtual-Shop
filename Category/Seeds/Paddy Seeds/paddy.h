@@ -1,6 +1,3 @@
-//
-// Created by hossain on 6/28/24.
-//
 
 #ifndef AGRICULTURE_VIRTUAL_SHOP_PADDY_H
 #define AGRICULTURE_VIRTUAL_SHOP_PADDY_H
@@ -11,6 +8,7 @@ typedef  struct{
     int price;
 
 }seeds;
+
 
 
 void showAllPaddy();

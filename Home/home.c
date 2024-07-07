@@ -2,14 +2,14 @@
 #include <ctype.h>
 #include "home.h"
 #include<string.h>
-
 #include "../Category/All_category//category.h"
+#include"../Cart/Add to cart/cart.h"
 // show display
 void displayHeader(){
 
     char header[][100] = {"Home", "Category","Cart", "About", "Register/Login","Profile"};
 
-    int headerSize = sizeof(header)/sizeof(header[0]);
+    int headerSize = sizeof(header)/sizeof(header[0]);// number of element
 
     for(int i =0; i< headerSize; i++){
 
@@ -36,16 +36,16 @@ void toLower(char *str){
 
 // all service
 void chooseService() {
+
     printf("Select Service : ");
 
-
-
-    char userAnswer[100];
+    char userAnswer[50];
     scanf("%s", userAnswer);
+    toLower(userAnswer);
     lineBreak();// from->this;
 
     //"Home", "Category","Cart", "About", "Register/Login","Profile"
-    int compareWithCategory = !strcmp(userAnswer, "category");
+    int compareWithCategory = !strcmp(userAnswer, "category");//1
     int compareWithHome = !strcmp(userAnswer, "home");
 
     int compareWithCart = !strcmp(userAnswer, "cart");
@@ -59,16 +59,18 @@ void chooseService() {
         displayHeader();// from->this
     }else if(compareWithCategory){
 
-        displayAllCategory();// from Category/All_category/category.c
+        displayAllCategory();// from->Category/All_category/category.c
 
 
     }else if(compareWithAbout){
 
         printf("This online shop provide sealing service of all agricultural product\n\n");
+    } else if(compareWithCart){
+        showAllCartItems();// from-> Cart/Add to cart/ cart.h
     }
     else{
         printf("Enter Valid Service!\n");
-        chooseService();
+        chooseService();// from-> this;
 
     }
 
