@@ -38,7 +38,7 @@ void chooseCategory(){
     int fisheries = userInd ==2;
     int agrochemical = userInd ==3;
     int machine = userInd == 4;
-    int back = userInd == 5;
+    int back = !strcmp(userAns,"back");
 
     if(back){
 

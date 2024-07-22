@@ -6,56 +6,60 @@
 #include "../All_Seeds/all seeds.h"
 #include"../../../Cart/Add to cart/cart.h"
 
-static nuts allNuts[6];
+
+
+static nuts allNuts[20];
+
 void showAllNut(){
 
+    nuts Nut;
 
+    FILE *readAllNuts = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Category/Seeds/Nut/nut.txt", "r");
+    int i =0, totalProduct = 0;
 
-    strcpy(allNuts[0].name, "Almond");
-    allNuts[0].price = 1200;
+    while(fread(&Nut, sizeof (nuts), 1,readAllNuts)){
 
-    strcpy(allNuts[1].name, "Cashew");
-    allNuts[1].price = 1499;
+        printf("        %c.%s(%dtk)  ",'A'+i,Nut.name, Nut.price);
 
-    strcpy(allNuts[2].name, "Pistachio");
-    allNuts[2].price = 999;
+        strcpy(allNuts[totalProduct].name, Nut.name);
+        allNuts[totalProduct].price = Nut.price;
+        totalProduct++;
 
-    strcpy(allNuts[3].name, "Peanut");
-    allNuts[3].price = 600;
-
-    strcpy(allNuts[4].name, "Cacao_bob");
-    allNuts[4].price = 4000;
-
-    strcpy(allNuts[5].name, "Macadamia");
-    allNuts[5].price = 1199;
-
-
-    // show all nuts
-
-    printf("************ Nut ***********\n");
-
-    for(int i =0; i< 6; i++){
-
-        printf("        %c.%s(%dtk)  ",'A'+i,allNuts[i].name, allNuts[i].price);
         if(i ==2){
 
             printf("\n");
         }
-
+        i++;
 
     }
 
+
+
+
     printf("\n");
+    // user status
+    FILE *loginStatusFile = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Login/loginStatus.txt", "r");
+    char loginStatus[10];
+    char userGmail[50];
+    char adminStatus[10];
+    fscanf(loginStatusFile, "%s", loginStatus);
+    fscanf(loginStatusFile, "%s", userGmail);
+    fscanf(loginStatusFile, "%s", adminStatus);
+    fclose(loginStatusFile);
 
-    chooseNut();// form-> this
+    int isAdmin = !strcmp(adminStatus, "yes");
 
-
+    if(isAdmin){
+        nextCommand();
+    }else {
+        chooseNut(totalProduct);// form-> this
+    }
 
 
 }
 
 
-void chooseNut(){
+void chooseNut(int totalProduct ){
 
     printf("Select product/back: ");
     char userAns[100];
@@ -80,13 +84,12 @@ void chooseNut(){
         int productPrice;
 
 
-
         int startInd = (int)'a';
-        int endInd  = (int)'f';
+        int endInd  = totalProduct;
         int userChossenInd = (int)userAns[0];
         int productInd = userChossenInd-startInd;
 
-        if (endInd>=userChossenInd && strlen(userAns) ==1) {
+        if (endInd>= (userChossenInd-'a') && strlen(userAns) ==1 ) {
             strcpy(productname,allNuts[productInd].name);
 
             productPrice = allNuts[productInd].price;
@@ -98,14 +101,14 @@ void chooseNut(){
             } else {
                 printf("Your cart is full!.Delete checkout or delete few item.\n");
             }
-            chooseNut();
+            chooseNut(totalProduct);
 
 
         }
         else{
 
-            printf("Item not found!");
-            chooseNut();
+            printf("Item not found!\n");
+            chooseNut(totalProduct);
 
         }
     }
@@ -113,3 +116,58 @@ void chooseNut(){
 
 
 }
+
+
+void addNut(){
+
+    FILE *NUT = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Category/Seeds/Nut/nut.txt", "a");
+    nuts  Nut;
+
+    char nutName[50];
+    int nutPrice;
+
+    printf("Enter Nut name : ");
+    scanf("%s", nutName);
+
+    printf("Enter Nut price : ");
+    scanf("%d", &nutPrice);
+
+    strcpy(Nut.name, nutName);
+    Nut.price = nutPrice;
+
+    fwrite(&Nut, sizeof(nuts), 1, NUT);
+
+    fclose(NUT);
+
+
+
+}
+
+void nextCommand(){
+
+    printf("Enter add or back: ");
+
+    char userAns[10];
+    scanf("%s", userAns);
+
+    int add = !strcmp(userAns, "add");
+    int back = !strcmp(userAns, "back");
+
+    if(add){
+
+        addNut();
+        nextCommand();
+    }else if(back){
+
+        showAllTypeOfSeeds();
+
+    }else{
+
+        printf("enter valid command\n");
+        nextCommand();
+    }
+
+
+
+}
+

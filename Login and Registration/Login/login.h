@@ -5,5 +5,7 @@
 
 void loginPage();
 void accountNotFound();
+void typeOfUser();
+void adminLogin();
 
 #endif //AGRICULTURE_VIRTUAL_SHOP_LOGIN_H

@@ -10,9 +10,10 @@ typedef struct{
 
 }nuts;
 
-
+void addNut();
 void showAllNut();
-void chooseNut();
+void chooseNut(int totalProduct);
 void goBack();
+void nextCommand();
 
 #endif //AGRICULTURE_VIRTUAL_SHOP_NUT_H

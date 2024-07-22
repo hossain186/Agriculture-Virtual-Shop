@@ -1,0 +1,10 @@
+
+
+#ifndef AGRICULTURE_VIRTUAL_SHOP_SEARCH_H
+#define AGRICULTURE_VIRTUAL_SHOP_SEARCH_H
+
+void searchingPage();
+void searchProduct();
+
+
+#endif //AGRICULTURE_VIRTUAL_SHOP_SEARCH_H

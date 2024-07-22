@@ -7,52 +7,188 @@
 #include "../../Home/home.h"
 
 
-void loginPage(){
+//    FILE *registration = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Registraton Data/Admin_registration_data.txt", "r");
 
-    printf("******** Login ********\n");
+void typeOfUser(){
+    printf("******* Login Page *********\n");
 
-    char userEmail[50];
-    char userPass[20];
+    char userAns[10];
+
+    printf("Select type of User(admin/typical) or back: ");
+    scanf("%s", userAns);
+
+    toLower(userAns);
+
+    int admin= !strcmp(userAns, "admin");
+    int typical= !strcmp(userAns, "typical");
+    int back = !strcmp(userAns, "back");
+
+    if(back){
+
+        displayHeader();
+
+    }else if(admin){
+
+        adminLogin();
+
+    }else if(typical){
+        loginPage();
+
+    }else{
+
+        printf("Enter valid type!\n");
+        typeOfUser();
+    }
+
+
+
+
+}
+
+
+void adminLogin(){
+
+    AdminRegister admin;
+    printf("******** Admin Login ********\n");
+
+    char userGmail[50];
+    char userPass[50];
+    char secreteKey[20];
 
     printf("    Enter your email : ");
-    scanf("    %s", userEmail);
+    scanf("    %s", userGmail);
 
     printf("    Enter your password : ");
     scanf("    %s", userPass);
 
-    FILE* registrationData = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Registraton Data/registration_data.txt","r" );
+    printf("    Enter your secrete key : ");
+    scanf("    %s", secreteKey);
 
-    int cnt = 0;
-    char word[50];
-    while (fscanf(registrationData, "%s", word) != EOF) {
-        if(cnt ==1){
-            int passCompare = !strcmp(userPass,word );
-            if(passCompare){
+    FILE *registration = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Registraton Data/Admin_registration_data.txt", "r");
 
-                printf("    Login Successful.\n");
-                displayHeader();
+    while(fread(&admin,  sizeof(AdminRegister), 1, registration)){
+
+        int validGmail = !strcmp(admin.gmail, userGmail);
+
+        if(validGmail){
+
+            int validPass = !strcmp(admin.password, userPass);
+
+            if(validPass){
+
+                int validSecreteKey = !strcmp(admin.secreteKey, secreteKey);
+                if(validSecreteKey){
+
+                    FILE *loginStatusFile = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Login/loginStatus.txt", "w");
+
+                    // maintain login status
+                    fprintf(loginStatusFile, "%s\n","yes");
+                    fprintf(loginStatusFile, "%s\n",admin.gmail );
+                    fprintf(loginStatusFile, "%s\n",admin.status );
+                    fclose(loginStatusFile);
+
+
+                    printf("Welcome, %s!\n", admin.lastName);
+                    fclose(registration);
+
+                    displayHeader();
+
+
+                }else{
+
+                    printf("Secrete key doesn't match!\n");
+                    fclose(registration);
+                    displayHeader();
+
+
+                }
+
 
             }else{
 
-                printf("    Incorrect password!\n");
-                loginPage();
+                printf("Password doesn't match!\n");
+                fclose(registration);
+                displayHeader();
+
             }
 
-        }else {
-
-
-            int emailCompare = !strcmp(userEmail, word);
-            if(emailCompare){
-
-                cnt++;
-            }
         }
 
 
-    }
-    fclose(registrationData);
-    accountNotFound();
 
+    }
+
+    printf("Admin account not found!\n");
+
+    fclose(registration);
+    typeOfUserForRegister();
+
+
+}
+
+
+
+void loginPage(){
+
+    TypicalRegister user;
+    printf("******** User Login ********\n");
+
+    char userGmail[50];
+    char userPass[50];
+
+
+    printf("    Enter your email : ");
+    scanf("    %s", userGmail);
+
+    printf("    Enter your password : ");
+    scanf("    %s", userPass);
+
+
+    FILE *registration = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Registraton Data/registration_data.txt", "r");
+
+    while(fread(&user,  sizeof(TypicalRegister), 1, registration)){
+
+        int validGmail = !strcmp(user.gmail, userGmail);
+
+        if(validGmail){
+
+            int validPass = !strcmp(user.password, userPass);
+
+            if(validPass){
+
+
+                FILE *loginStatusFile = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Login/loginStatus.txt", "w");
+
+                // maintain login status
+                fprintf(loginStatusFile, "%s\n","yes");
+                fprintf(loginStatusFile, "%s\n",user.gmail );
+                fprintf(loginStatusFile, "%s\n",user.status );
+                fclose(loginStatusFile);
+
+
+                printf("Welcome, %s!\n", user.lastName);
+                fclose(registration);
+                displayHeader();
+
+
+            }else{
+
+                printf("Password doesn't match!\n");
+                fclose(registration);
+                loginPage();
+
+            }
+
+        }
+
+
+
+    }
+
+    printf("User account not found!\n");
+
+    fclose(registration);
+    typeOfUserForRegister();
 
 
 }
@@ -66,21 +202,20 @@ void accountNotFound(){
     int login = !strcmp(userAns, "login");
     int registration = !strcmp(userAns, "register");
     int back = !strcmp(userAns, "back");
+
+
     if(back){
-        displayHeader();
+        displayHeader();// Home
     }else if(login){
-        loginPage();
+        loginPage();// login
     } else if (registration){
-        registrationPage();
+        registrationPage();// registration
     }else{
 
         printf("   Enter valid input!\n");
-        accountNotFound();
+        accountNotFound();// itself
 
     }
-
-
-
 
 
 }

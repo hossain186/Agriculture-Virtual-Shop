@@ -9,9 +9,9 @@ typedef struct{
 
 }Legume;
 
-
+void addlegume();
 void showAllLegume();
-void chooseLegume();
+void chooseLegume(int totalProduct);
 
 
 

@@ -6,21 +6,60 @@
 #include"../Cart/Add to cart/cart.h"
 #include"../Login and Registration/Registration/registration.h"
 #include"../Login and Registration/Login/login.h"
+#include"../Login and Registration/LogOut/logOut.h"
+#include "../Search /search.h"
+#include "../Profile/profile.h"
+#include "../Dash Board/dashBoard.h"
+
 // show display
 void displayHeader(){
 
-    char header[][100] = {"Home", "Category","Cart", "About", "Register/Login","Profile"};
+    // login status
+    FILE *loginStatusFile = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Login/loginStatus.txt", "r");
 
-    int headerSize = sizeof(header)/sizeof(header[0]);// number of element
+    char loginStatus[10];
+    char userGmail[50];
+    char adminStatus[10];
+    fscanf(loginStatusFile, "%s", loginStatus);
+    fscanf(loginStatusFile, "%s", userGmail);
+    fscanf(loginStatusFile, "%s", adminStatus);
+    fclose(loginStatusFile);
+
+    int alreadyLogin = !strcmp(loginStatus, "yes");
+    int isAdmin = !strcmp(adminStatus, "yes");
+
+
+
     printf("********************* Home ********************\n");
-    for(int i =0; i< headerSize; i++){
-
-        printf("%s ",header[i]);
-
+    printf("Home ");
+    printf("Category ");
+    printf("Search ");
+    if(isAdmin){
+        printf("Dashboard ");
+    }else{
+        printf("Cart ");
     }
+
+
+    if(alreadyLogin){
+
+        printf("LogOut ");
+    }else {
+
+        printf("Register/Login ");
+    }
+    if(alreadyLogin){
+
+        printf("Profile ");
+    }
+
+    printf("About ");
+
+
+
     printf("\n");
 
-    chooseService();// from->this
+    chooseService(isAdmin);// from->this
 
 }
 
@@ -37,7 +76,7 @@ void toLower(char *str){
 
 
 // all service
-void chooseService() {
+void chooseService(int isAdmin) {
 
     printf("Select Service : ");
 
@@ -55,6 +94,19 @@ void chooseService() {
     int compareWithProfile = !strcmp(userAnswer, "profile");
     int compareWithLogin = !strcmp(userAnswer, "login");
     int compareWithRegister = !strcmp(userAnswer, "register");
+    int compareWithSearch = !strcmp(userAnswer, "search");
+    int logout = !strcmp(userAnswer, "logout");
+    int dashboard = !strcmp(userAnswer, "dashboard");
+
+
+    // login status
+    FILE *loginStatusFile = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Login/loginStatus.txt", "r");
+    char loginStatus[10];
+    fscanf(loginStatusFile, "%s", loginStatus);
+    fclose(loginStatusFile);
+
+    int alreadyLogin = !strcmp(loginStatus, "yes");
+
 
     if(compareWithHome){
 
@@ -67,18 +119,34 @@ void chooseService() {
     }else if(compareWithAbout){
 
         printf("This online shop provide sealing service of all agricultural product\n\n");
-    } else if(compareWithCart){
+    } else if (dashboard && isAdmin){
+        showDashBoard();
+    }else if(compareWithCart && !isAdmin){
+
+
         showAllCartItems();// from-> Cart/Add to cart/ cart.h
-    }else if (compareWithRegister){
-        registrationPage();
-    }else if(compareWithLogin){
 
-        loginPage();
 
+    }else if (compareWithRegister && !alreadyLogin){
+        typeOfUserForRegister();
+    }else if(compareWithLogin && !alreadyLogin){
+
+        typeOfUser();
+
+    }else if(compareWithSearch){
+
+        searchingPage();// from-> search/search.h
+
+
+    }else if (compareWithProfile && alreadyLogin){
+        showProfileData();
+    }else if (logout && alreadyLogin){
+
+        logOut();
     }
     else{
         printf("Enter Valid Service!\n");
-        chooseService();// from-> this;
+        chooseService(isAdmin);// from-> this;
 
     }
 

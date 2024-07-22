@@ -27,9 +27,7 @@ void showAllGrowthRegulators() {
     printf("********* Growth Regulators *********\n");
     for (int i = 0; i < 6; i++) {
         printf("      %c. %s(%dtk)\n", 'A' + i, allGrowthRegulators[i].name, allGrowthRegulators[i].price);
-        if ((i + 1) % 3 == 0 && i != 5) {
-            printf("\n");
-        }
+
     }
     printf("\n");
 
@@ -38,6 +36,7 @@ void showAllGrowthRegulators() {
 
 // Function to allow user to choose a growth regulator or go back
 void chooseGrowthRegulator() {
+
     printf("Add to cart (back): ");
     char userAns[20];
     scanf("%s", userAns);

@@ -16,6 +16,7 @@ typedef struct{
 
 int addItemToCart(char itemName[], int itemPrice);
 void showAllCartItems();
+void go_back();
 
 
 

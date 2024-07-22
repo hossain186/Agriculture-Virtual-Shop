@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "./home.h"
-
+#include"../Category/Seeds/Nut/Nut.h"
 
 int main(){
 

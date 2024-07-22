@@ -35,7 +35,7 @@ void chooseMedicine(){
     scanf("%s", userAns);
     toLower(userAns);// from-> Home/home.c
 
-    int userInd = (int)userAns[0] - (int )'a';
+    int userInd = (int)userAns[0] - (int )'a';// convert to respondent index
 
 
 

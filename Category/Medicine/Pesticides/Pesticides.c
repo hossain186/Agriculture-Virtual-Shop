@@ -27,9 +27,7 @@ void showAllPesticides() {
     printf("********* Pesticides *********\n");
     for (int i = 0; i < 6; i++) {
         printf("      %c. %s(%dtk)\n", 'A' + i, allPesticides[i].name, allPesticides[i].price);
-        if (i  % 2 == 0 ) {
-            printf("\n");
-        }
+
     }
 
     printf("\n");

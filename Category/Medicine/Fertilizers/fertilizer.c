@@ -11,6 +11,7 @@
 
 Fertilizer  allFertilizers[6];
 void showALlFertilizer() {
+
     // Initialize fertilizers
     strcpy(allFertilizers[0].name, "Urea");
     allFertilizers[0].price = 1200;
@@ -28,9 +29,7 @@ void showALlFertilizer() {
     printf("********* Fertilizers *********\n");
     for (int i = 0; i < 6; i++) {
         printf("      %c. %s(%dtk)\n", 'A'+i, allFertilizers[i].name, allFertilizers[i].price);
-        if ((i + 1) % 3 == 0 && i != 5) {
-            printf("\n");
-        }
+
     }
     printf("\n");
 
@@ -40,6 +39,7 @@ void showALlFertilizer() {
 
 // Function to allow user to choose a fertilizer or go back
 void chooseFertilizer() {
+
     printf("Add to cart (back): ");
     char userAns[20];
     scanf("%s", userAns);
@@ -53,6 +53,7 @@ void chooseFertilizer() {
     } else if (cart) {
         showAllCartItems();
     } else {
+
         char productName[100];
         int productPrice;
 
@@ -69,7 +70,8 @@ void chooseFertilizer() {
             strcpy(productName , allFertilizers[userInd-startInd].name);
             productPrice = allFertilizers[userInd-startInd].price;
 
-            int added = addItemToCart(productName, productPrice);
+
+            int added = addItemToCart(productName, productPrice);// return 0/1
             if (added) {
                 printf("Added item successfully.\n");
             } else {
@@ -80,5 +82,7 @@ void chooseFertilizer() {
             printf("Item not found!\n");
             chooseFertilizer();
         }
+
+
     }
 }
