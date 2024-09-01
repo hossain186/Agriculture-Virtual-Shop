@@ -5,6 +5,9 @@
 #include "../Login/login.h"
 #include "../../Home/home.h"
 
+#define cmp(s1,s2) !strcmp(s1,s2)
+
+
 void typeOfUserForRegister(){
     printf("******* Registration *********\n");
 
@@ -72,8 +75,8 @@ void adminRegistration(){
 
     char firstName[30];
     char lastName[20];
-    char userGmail[50];
-    char userPhone[20];
+    char adminGmail[50];
+    char adminPhone[20];
     char secreteKey[50];
 
     char password[50];
@@ -100,14 +103,14 @@ void adminRegistration(){
 
 
     printf("    Enter your gmail : ");
-    scanf("    %s",userGmail );
-    strcpy(admin.gmail, userGmail);
+    scanf("    %s",adminGmail );
+    strcpy(admin.gmail, adminGmail);
 
 
 
     printf("    Enter your phone number : ");
-    scanf("    %s", userPhone);
-    strcpy(admin.phone, userPhone);
+    scanf("    %s", adminPhone);
+    strcpy(admin.phone, adminPhone);
 
 
 
@@ -129,13 +132,26 @@ void adminRegistration(){
     scanf("    %s", confirmPassword);
 
 
+    // check account existence
+    FILE *file = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Registraton Data/Admin_registration_data.txt", "r");
+    int adminAccountAlreadyExist = AdminAccountExistence(file,adminGmail);
+    fclose(file);
+
+
+
 
     FILE *registration = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Registraton Data/Admin_registration_data.txt", "a");
 
     // compare
     int cmpPassword = !strcmp(password, confirmPassword);
 
-    if(cmpPassword){
+
+
+    if(adminAccountAlreadyExist){
+        printf("Admin account already exist!. Please try again.\n\n");
+        displayHeader();
+
+    }else if(cmpPassword){
 
 
         fwrite(&admin, sizeof(AdminRegister), 1,registration);
@@ -172,6 +188,7 @@ void registrationPage(){
 
     char password[50];
     char confirmPassword[20];
+    int accountAlreadyExist = 0;
 
     // admin status
     strcpy(user.status, "no");
@@ -224,10 +241,19 @@ void registrationPage(){
 
     FILE *registration = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Registraton Data/registration_data.txt", "a");
 
+
+    FILE *registrationFileForCheckingExistence = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Registraton Data/registration_data.txt", "r");
+    accountAlreadyExist = userAccountExistence(registrationFileForCheckingExistence, userGmail);
+    fclose(registrationFileForCheckingExistence);
+
     // compare
     int cmpPassword = !strcmp(password, confirmPassword);
 
-    if(cmpPassword){
+    if(accountAlreadyExist){
+        printf("Account already exist!. Please try again.\n\n");
+        displayHeader();
+    }
+    else if(cmpPassword){
 
 
         fwrite(&user, sizeof(TypicalRegister), 1,registration);
@@ -272,3 +298,44 @@ void chooseNext(){
 }
 
 
+int userAccountExistence(FILE *file, char userGmail[] ){
+
+    TypicalRegister user;
+
+    while(fread(&user, sizeof(TypicalRegister), 1,  file)){
+
+        int gmailExist  = !strcmp(user.gmail, userGmail);
+
+        if(gmailExist){
+
+            return 1;
+
+        }
+
+    }
+
+    return 0;
+
+
+}
+
+int AdminAccountExistence(FILE *file, char adminGmail[] ){
+
+    AdminRegister admin;
+
+    while(fread(&admin, sizeof(AdminRegister), 1,  file)){
+
+        int gmailExist  = !strcmp(admin.gmail, adminGmail);
+
+        if(gmailExist){
+
+            return 1;
+
+        }
+
+    }
+
+    return 0;
+
+
+}

@@ -38,4 +38,8 @@ void registrationPage();
 void chooseNext();
 void typeOfUserForRegister();
 void adminRegistration();
+int userAccountExistence();
+int AdminAccountExistence();
+
+
 #endif //AGRICULTURE_VIRTUAL_SHOP_REGISTRATION_H

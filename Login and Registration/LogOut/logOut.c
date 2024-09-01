@@ -7,7 +7,7 @@
 
 void logOut(){
 
-    printf("************* Log In ***********\n");
+    printf("************* Logout ***********\n");
     char userAns[10];
     printf("Enter yes or back: ");
     scanf("%s", userAns);

@@ -86,7 +86,7 @@ void showAllCartItems(){
 
     if(!alreadyLogin){
 
-        printf("Login Required!\n");
+        printf("    Login Required!\n");
         go_back();
 
     }
@@ -106,15 +106,15 @@ void showAllCartItems(){
             int totalPrice = user.totalPrice;
 
             if(totalCartItem == 0){
-                printf("Your Cart Is Empty!\n");
+                printf("    Your Cart Is Empty!\n");
             }else{
 
-                printf("Total Price      : %d\n", totalPrice);
-                printf("Total cart item  : %d\n", totalCartItem);
-
+                printf("    Total Price      : %d\n", totalPrice);
+                printf("    Total cart item  : %d\n", totalCartItem);
+                printf("----------------------------\n");
                 for(int i = 0; i< totalCartItem;i++){
 
-                    printf("%s ", user.cartItems[i]);
+                    printf("    %s ", user.cartItems[i]);
 
                     if(i%2 ==0){
                         br;

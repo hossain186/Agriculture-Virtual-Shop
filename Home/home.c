@@ -39,14 +39,17 @@ void displayHeader(){
     }else{
         printf("Cart ");
     }
+    if(alreadyLogin){
 
+        printf("MyOrder ");
+    }
 
     if(alreadyLogin){
 
-        printf("LogOut ");
+        printf("SignOut ");
     }else {
 
-        printf("Register/Login ");
+        printf("SignUp/SignIn ");
     }
     if(alreadyLogin){
 
@@ -92,10 +95,10 @@ void chooseService(int isAdmin) {
     int compareWithCart = !strcmp(userAnswer, "cart");
     int compareWithAbout = !strcmp(userAnswer, "about");
     int compareWithProfile = !strcmp(userAnswer, "profile");
-    int compareWithLogin = !strcmp(userAnswer, "login");
-    int compareWithRegister = !strcmp(userAnswer, "register");
+    int compareWithSignIn = !strcmp(userAnswer, "signin");
+    int compareWithSignUp = !strcmp(userAnswer, "signup");
     int compareWithSearch = !strcmp(userAnswer, "search");
-    int logout = !strcmp(userAnswer, "logout");
+    int signOut = !strcmp(userAnswer, "signout");
     int dashboard = !strcmp(userAnswer, "dashboard");
 
 
@@ -127,9 +130,9 @@ void chooseService(int isAdmin) {
         showAllCartItems();// from-> Cart/Add to cart/ cart.h
 
 
-    }else if (compareWithRegister && !alreadyLogin){
+    }else if (compareWithSignUp && !alreadyLogin){
         typeOfUserForRegister();
-    }else if(compareWithLogin && !alreadyLogin){
+    }else if(compareWithSignIn && !alreadyLogin){
 
         typeOfUser();
 
@@ -140,7 +143,7 @@ void chooseService(int isAdmin) {
 
     }else if (compareWithProfile && alreadyLogin){
         showProfileData();
-    }else if (logout && alreadyLogin){
+    }else if (signOut && alreadyLogin){
 
         logOut();
     }
