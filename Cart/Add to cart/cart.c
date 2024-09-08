@@ -5,6 +5,8 @@
 #include "../../Home/home.h"
 #include "../../Login and Registration/Registration/registration.h"
 #define br printf("\n")
+#include "../Delete_Item_From_Cart/delete_item.h"
+
 
 int addItemToCart(char itemName[], int itemPrice) {
 
@@ -29,18 +31,20 @@ int addItemToCart(char itemName[], int itemPrice) {
             int totalCartItem = user.cartItemCount;
             int totalPrice = user.totalPrice;
 
-            totalPrice+= itemPrice;
-
             if(totalCartItem>=20){
                 fclose(registration);
                 return 0;
 
             }else{
 
-                strcpy(user.cartItems[totalCartItem],itemName);
+                totalPrice+= itemPrice;
+
+                strcpy(user.cartItems[totalCartItem].itemName,itemName);
                 user.totalPrice = totalPrice;
                 totalCartItem++;
                 user.cartItemCount = totalCartItem;
+
+                user.cartItems[totalCartItem].itemPrice = itemPrice;
 
                 fseek(registration, -sizeof(TypicalRegister), SEEK_CUR);
                 fwrite(&user, sizeof (TypicalRegister), 1, registration);
@@ -67,7 +71,6 @@ int addItemToCart(char itemName[], int itemPrice) {
 
 
 void showAllCartItems(){
-
 
 
     printf("*********** Cart **********\n");
@@ -107,6 +110,7 @@ void showAllCartItems(){
 
             if(totalCartItem == 0){
                 printf("    Your Cart Is Empty!\n");
+                go_back();
             }else{
 
                 printf("    Total Price      : %d\n", totalPrice);
@@ -114,7 +118,7 @@ void showAllCartItems(){
                 printf("----------------------------\n");
                 for(int i = 0; i< totalCartItem;i++){
 
-                    printf("    %s ", user.cartItems[i]);
+                    printf("   %c. %s ",'A'+i, user.cartItems[i].itemName);
 
                     if(i%2 ==0){
                         br;
@@ -129,32 +133,53 @@ void showAllCartItems(){
     }
 
     fclose(registration);
-    go_back();
+    addToOrderOrDelete();
 
 
+}
+
+void addToOrderOrDelete(){
+
+    br;
+    char userAns;
+    printf("Choose service (A.Order/B.Delete/C.Back): ");
+    scanf(" %c", &userAns);
 
 
+    if(userAns == 'C' || userAns == 'c'){
 
+        displayHeader();
+
+    }else if(userAns == 'a' || userAns == 'A'){
+
+        printf("hello");
+    }else if(userAns == 'b' || userAns == 'B'){
+
+        deleteItemFromCart();
+
+    }
+
+    else{
+
+        printf("Command not found!. Enter again\n");
+        go_back();
+
+    }
 
 }
 
 void go_back(){
 
-    br;
-    char userAns[10];
-    printf("Enter back: ");
-    scanf("%s", userAns);
-    int back = !strcmp(userAns, "back");
+    printf("Go A.back : ");
+    char userAns;
+    scanf(" %c", &userAns);
 
-    if(back){
-
+    if(userAns == 'a' || userAns == 'A'){
         displayHeader();
-
     }else{
 
-        printf("Command not found!. Enter again\n");
+        printf("Enter valid service!\n");
         go_back();
-
     }
 
 }

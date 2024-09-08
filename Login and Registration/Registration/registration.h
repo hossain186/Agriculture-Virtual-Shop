@@ -19,13 +19,29 @@ typedef struct {
 
 typedef struct {
 
+    char productName[50];
+    int quantity;
+    int totalPrice;
+
+
+}MyOrder;
+
+typedef struct {
+
+    char itemName[100];
+    int itemPrice;
+
+}Item;
+typedef struct {
+
     char firstName[30];
     char lastName[20];
     char gmail[50];
     char phone[20];
     char status[5];
     char password[50];
-    char cartItems[20][100];
+    Item cartItems[21];
+    MyOrder myOrder[20];
     int cartItemCount;
     int totalPrice;
 
