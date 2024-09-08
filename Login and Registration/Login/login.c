@@ -12,26 +12,20 @@
 void typeOfUser(){
     printf("******* Login Page *********\n");
 
-    char userAns[10];
+    char userAns;
 
-    printf("Select type of User(admin/typical) or back: ");
-    scanf("%s", userAns);
+    printf("Select type of User(A.admin/B.typical) or C.back: ");
+    scanf(" %c", &userAns);
 
-    toLower(userAns);
-
-    int admin= !strcmp(userAns, "admin");
-    int typical= !strcmp(userAns, "typical");
-    int back = !strcmp(userAns, "back");
-
-    if(back){
+    if(userAns == 'c' || userAns == 'C'){
 
         displayHeader();
 
-    }else if(admin){
+    }else if(userAns == 'A' || userAns == 'a'){
 
         adminLogin();
 
-    }else if(typical){
+    }else if(userAns == 'b' || userAns == 'B'){
         loginPage();
 
     }else{
@@ -195,20 +189,18 @@ void loginPage(){
 
 void accountNotFound(){
 
-    printf("    Your email not found. enter register/login(back)");
-    char userAns[20];
-    scanf("    %s", userAns);
-
-    int login = !strcmp(userAns, "login");
-    int registration = !strcmp(userAns, "register");
-    int back = !strcmp(userAns, "back");
+    printf("    Your email not found. Enter (A.register/B.login/C.back)");
+    char userAns;
+    scanf("     %c", &userAns);
 
 
-    if(back){
+
+
+    if(userAns == 'C' || userAns == 'c'){
         displayHeader();// Home
-    }else if(login){
+    }else if(userAns == 'B' || userAns == 'b'){
         loginPage();// login
-    } else if (registration){
+    } else if (userAns == 'A' || userAns == 'a'){
         registrationPage();// registration
     }else{
 

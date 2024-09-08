@@ -42,7 +42,7 @@ int addItemToCart(char itemName[], int itemPrice) {
                 totalCartItem++;
                 user.cartItemCount = totalCartItem;
 
-                fseek(registration, -sizeof(user), 1 );
+                fseek(registration, -sizeof(TypicalRegister), SEEK_CUR);
                 fwrite(&user, sizeof (TypicalRegister), 1, registration);
 
                 fclose(registration);

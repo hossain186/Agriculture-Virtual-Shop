@@ -8,14 +8,12 @@
 void logOut(){
 
     printf("************* Logout ***********\n");
-    char userAns[10];
-    printf("Enter yes or back: ");
-    scanf("%s", userAns);
+    char userAns;
+    printf("Enter A.yes or B.back: ");
+    scanf(" %c", &userAns);
 
-    int yes = !strcmp(userAns, "yes");
-    int back = !strcmp(userAns, "back");
 
-    if(yes){
+    if(userAns == 'A' || userAns == 'a'){
 
         FILE *loginStatusFile = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Login/loginStatus.txt", "w");
         fprintf(loginStatusFile, "%s\n","no");
@@ -25,7 +23,7 @@ void logOut(){
         displayHeader();
 
 
-    }else if(back){
+    }else if(userAns == 'B' || userAns == 'b'){
 
         displayHeader();
 
@@ -34,7 +32,6 @@ void logOut(){
         printf("enter valid type!\n");
         logOut();
     }
-
 
 
 }

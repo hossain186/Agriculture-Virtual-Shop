@@ -31,33 +31,39 @@ void displayHeader(){
 
 
     printf("********************* Home ********************\n");
-    printf("Home ");
-    printf("Category ");
-    printf("Search ");
+    printf("A.Home  ");
+    printf("B.Category  ");
+    printf("C.Search  ");
+
+
     if(isAdmin){
-        printf("Dashboard ");
+        printf("D.Dashboard  ");
     }else{
-        printf("Cart ");
+        printf("D.Cart  ");
     }
     if(alreadyLogin){
 
-        printf("MyOrder ");
+        printf("E.MyOrder  ");
     }
 
     if(alreadyLogin){
 
-        printf("SignOut ");
+        printf("F.SignOut  ");
     }else {
 
-        printf("SignUp/SignIn ");
+        printf("E.SignUp  ");
+        printf("F.SignIn  ");
     }
     if(alreadyLogin){
 
-        printf("Profile ");
+        printf("G.Profile  ");
     }
 
-    printf("About ");
-
+    if(alreadyLogin){
+        printf("H.About ");
+    }else {
+        printf("G.About ");
+    }
 
 
     printf("\n");
@@ -81,26 +87,22 @@ void toLower(char *str){
 // all service
 void chooseService(int isAdmin) {
 
-    printf("Select Service : ");
 
-    char userAnswer[50];
-    scanf("%s", userAnswer);
-    toLower(userAnswer);
-    lineBreak();// from->this;
+
 
     //"Home", "Category","Cart", "About", "Register/Login","Profile"
-    int compareWithCategory = !strcmp(userAnswer, "category");//1
-    int compareWithHome = !strcmp(userAnswer, "home");
+    /*int compareWithCategory = !strcmp(userAnswer, "B");//1
+    int compareWithHome = !strcmp(userAnswer, "A");
 
-    int compareWithCart = !strcmp(userAnswer, "cart");
+    int compareWithCart = !strcmp(userAnswer, "D");
     int compareWithAbout = !strcmp(userAnswer, "about");
     int compareWithProfile = !strcmp(userAnswer, "profile");
     int compareWithSignIn = !strcmp(userAnswer, "signin");
     int compareWithSignUp = !strcmp(userAnswer, "signup");
-    int compareWithSearch = !strcmp(userAnswer, "search");
+    int compareWithSearch = !strcmp(userAnswer, "C");
     int signOut = !strcmp(userAnswer, "signout");
     int dashboard = !strcmp(userAnswer, "dashboard");
-
+     */
 
     // login status
     FILE *loginStatusFile = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Login/loginStatus.txt", "r");
@@ -108,9 +110,63 @@ void chooseService(int isAdmin) {
     fscanf(loginStatusFile, "%s", loginStatus);
     fclose(loginStatusFile);
 
+
+
     int alreadyLogin = !strcmp(loginStatus, "yes");
+    printf("Select Service : ");
+
+    char userAnswer;
+    scanf(" %c", &userAnswer);
+    lineBreak();
+
+    if(userAnswer == 'A' || userAnswer == 'a'){
+        displayHeader();// from-> this
+
+    }else if(userAnswer == 'B' || userAnswer == 'b'){
+        displayAllCategory();// from->Category/All_category/category.c
+
+    }else if((userAnswer == 'D' || userAnswer == 'd') && isAdmin){
+        showDashBoard();
+    }else if(userAnswer == 'D' || userAnswer == 'd'){
+        showAllCartItems();// from-> Cart/Add to cart/ cart.h
+
+    }else if(userAnswer == 'c' || userAnswer == 'C'){
+        searchProduct();// from-> Cart/Add to cart/ cart.h
+
+    }else if(!alreadyLogin && (userAnswer =='E' || userAnswer == 'e')){
+        typeOfUserForRegister();
+
+    }else if(!alreadyLogin  && (userAnswer =='F' || userAnswer == 'f')){
+        typeOfUser();
+    }else if((!alreadyLogin ) && (userAnswer =='G' || userAnswer == 'g')){
+        printf("This online shop provide sealing service of all agricultural product\n\n");
+
+    }else if(alreadyLogin) {
+
+        if(userAnswer == 'e' || userAnswer == 'E') {
+            printf("update soon\n");
+        }else if(userAnswer == 'f' || userAnswer == 'f') {
+
+            logOut();
+        }else if(userAnswer =='g' || userAnswer == 'G') {
+            showProfileData();
+        }else if(userAnswer == 'H' || userAnswer == 'h') {
+            printf("This online shop provide sealing service of all agricultural product\n\n");
+
+        }else {
+            printf("Enter Valid Service!\n");
+            chooseService(isAdmin);// from-> this;
+        }
 
 
+    }
+    else{
+
+            printf("Enter Valid Service!\n");
+            chooseService(isAdmin);// from-> this;
+
+    }
+    /*
     if(compareWithHome){
 
         displayHeader();// from->this
@@ -153,6 +209,7 @@ void chooseService(int isAdmin) {
 
     }
 
+     */
 
 }
 

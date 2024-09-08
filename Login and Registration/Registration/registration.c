@@ -11,30 +11,25 @@
 void typeOfUserForRegister(){
     printf("******* Registration *********\n");
 
-    char userAns[10];
+    char userAns;
 
-    printf("Select type of registration(admin/typical) or back: ");
-    scanf("%s", userAns);
+    printf("Select type of registration(A.admin/B.typical) or C.back: ");
+    scanf(" %c", &userAns);
 
-    toLower(userAns);
 
-    int admin= !strcmp(userAns, "admin");
-    int typical= !strcmp(userAns, "typical");
-    int back = !strcmp(userAns, "back");
-
-    if(back){
+    if(userAns == 'C' || userAns == 'c'){
 
         displayHeader();
 
-    }else if(admin){
+    }else if(userAns == 'A' || userAns == 'a'){
 
 
         printf("Enter secrete code: ");
+        char key[10];
+        scanf("%s", key);
+        toLower(key);
 
-        scanf("%s", userAns);
-        toLower(userAns);
-
-        int valid = !strcmp(userAns, "123");
+        int valid = !strcmp(key, "123");
 
         if(valid){
             fflush(stdin);
@@ -50,7 +45,7 @@ void typeOfUserForRegister(){
 
 
 
-    }else if(typical){
+    }else if(userAns == 'B' || userAns == 'b'){
         registrationPage();
 
     }else{
@@ -88,6 +83,7 @@ void adminRegistration(){
 
     printf("    Enter your first name : ");
     scanf("%s",firstName);
+
     fflush(stdin);
     strcpy(admin.firstName, firstName);
 
@@ -195,7 +191,7 @@ void registrationPage(){
 
 
     printf("    Enter your first name : ");
-    scanf("%s",firstName);
+    scanf("%s", firstName);
     fflush(stdin);
     strcpy(user.firstName, firstName);
 
@@ -213,6 +209,7 @@ void registrationPage(){
     printf("    Enter your gmail : ");
     scanf("    %s",userGmail );
     strcpy(user.gmail, userGmail);
+
 
 
 
