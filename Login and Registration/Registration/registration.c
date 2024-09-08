@@ -231,9 +231,10 @@ void registrationPage(){
     printf("    Confirm password : ");
     scanf("    %s", confirmPassword);
 
-    // set default cart item number and price
+    // set default cart item number and price,
     user.cartItemCount = 0;
     user.totalPrice = 0;
+    user.totalItemToOrder  = 0;
 
 
     FILE *registration = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Registraton Data/registration_data.txt", "a");

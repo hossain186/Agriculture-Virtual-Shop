@@ -11,6 +11,8 @@
 #include "../Profile/profile.h"
 #include "../Dash Board/dashBoard.h"
 
+#include "../My Order/my_order.h"
+
 // show display
 void displayHeader(){
 
@@ -144,7 +146,9 @@ void chooseService(int isAdmin) {
     }else if(alreadyLogin) {
 
         if(userAnswer == 'e' || userAnswer == 'E') {
-            printf("update soon\n");
+
+            showAllOrders();
+
         }else if(userAnswer == 'f' || userAnswer == 'f') {
 
             logOut();

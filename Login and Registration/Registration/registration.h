@@ -44,6 +44,7 @@ typedef struct {
     MyOrder myOrder[20];
     int cartItemCount;
     int totalPrice;
+    int totalItemToOrder;
 
 
 }TypicalRegister;

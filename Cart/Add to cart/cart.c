@@ -6,6 +6,7 @@
 #include "../../Login and Registration/Registration/registration.h"
 #define br printf("\n")
 #include "../Delete_Item_From_Cart/delete_item.h"
+#include "../../My Order/my_order.h"
 
 
 int addItemToCart(char itemName[], int itemPrice) {
@@ -98,6 +99,7 @@ void showAllCartItems(){
 
     FILE *registration = fopen("/home/hossain/Windo1/Agriculture_Virtual_Shop/Login and Registration/Registraton Data/registration_data.txt", "r");
 
+    int totalProductInCart =0;
 
     while(fread(&user, sizeof(TypicalRegister), 1,registration )){
 
@@ -107,6 +109,7 @@ void showAllCartItems(){
 
             int totalCartItem = user.cartItemCount;
             int totalPrice = user.totalPrice;
+            totalProductInCart = totalCartItem;
 
             if(totalCartItem == 0){
                 printf("    Your Cart Is Empty!\n");
@@ -133,12 +136,12 @@ void showAllCartItems(){
     }
 
     fclose(registration);
-    addToOrderOrDelete();
+    addToOrderOrDelete(totalProductInCart);
 
 
 }
 
-void addToOrderOrDelete(){
+void addToOrderOrDelete(int totalProductInCart){
 
     br;
     char userAns;
@@ -152,7 +155,8 @@ void addToOrderOrDelete(){
 
     }else if(userAns == 'a' || userAns == 'A'){
 
-        printf("hello");
+        chooseItemToOrder(totalProductInCart);
+
     }else if(userAns == 'b' || userAns == 'B'){
 
         deleteItemFromCart();

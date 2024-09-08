@@ -57,7 +57,7 @@ void deleteItemFromCart(){
             }
 
 
-            int deleted = chooseItem(user.gmail, totalCartItem);
+            int deleted = chooseItemToDelete(user.gmail, totalCartItem);
 
             if(deleted){
 
@@ -65,7 +65,7 @@ void deleteItemFromCart(){
                 showAllCartItems();
             }else{
 
-                printf("Failed to delete!\n");
+                printf("Failed to delete!!\n");
                 showAllCartItems();
             }
 
@@ -79,7 +79,7 @@ void deleteItemFromCart(){
 
 }
 
-int chooseItem(char gmail[50], int totalProduct){
+int chooseItemToDelete(char gmail[50], int totalProduct){
 
     printf("Choose product or Z.back  : ");
 
@@ -120,8 +120,8 @@ int chooseItem(char gmail[50], int totalProduct){
                 user.cartItemCount --;
 
                 fseek(registration, -sizeof(TypicalRegister), SEEK_CUR);
-
                 fwrite(&user, sizeof(TypicalRegister), 1, registration);
+                fflush(registration); // Ensure data is written to file
                 flag = 1;
                 break;
 
@@ -138,7 +138,7 @@ int chooseItem(char gmail[50], int totalProduct){
     }else{
 
         printf("Enter valid product!\n");
-        chooseItem(gmail, totalProduct);
+        chooseItemToDelete(gmail, totalProduct);
     }
 
 
@@ -146,3 +146,4 @@ int chooseItem(char gmail[50], int totalProduct){
 
 
 }
+
