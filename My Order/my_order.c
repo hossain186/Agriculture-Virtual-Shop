@@ -3,6 +3,8 @@
 #include "my_order.h"
 #include "../Login and Registration/Registration/registration.h"
 #include "../Cart/Delete_Item_From_Cart/delete_item.h"
+#include "../Home/home.h"
+#include "../Cart/Add to cart/cart.h"
 
 #define br printf("\n")
 
@@ -55,6 +57,7 @@ void showAllOrders() {
     }
 
     fclose(registration);
+    chooseBack();
 }
 
 // Add item to order list
@@ -133,21 +136,29 @@ void chooseItemToOrder(int totalProductInCart) {
             if (strcmp(userGmail, user.gmail) == 0) {
                 int quantity;
                 printf("Enter quantity: ");
-                scanf("%d", &quantity);
+                scanf(" %d", &quantity);
 
                 // Add the item to the order list
                 if (addToOrderList(user.cartItems[productIndex].itemName, user.cartItems[productIndex].itemPrice, quantity)) {
                     printf("Item added to the order successfully.\n");
+
                 } else {
                     printf("Failed to add item to the order.\n");
                 }
+
                 break;
             }
         }
 
         fclose(registration);
+        showAllCartItems();
+
+
     } else {
         printf("Enter a valid product.\n");
+
+        showAllCartItems();
+
     }
 }
 
@@ -205,3 +216,21 @@ int removeItemFromCart(char productName[], char gmail[]) {
     return success;
 }
 
+void chooseBack(){
+
+    printf("Enter A.back :");
+    char userAns;
+    scanf(" %c", &userAns);
+    br;
+
+    if(userAns == 'a' || userAns =='A'){
+        displayHeader();
+
+    }else{
+
+        printf("Enter valid service!\n");
+        chooseBack();
+    }
+
+
+}

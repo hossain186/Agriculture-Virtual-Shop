@@ -144,9 +144,12 @@ void showAllCartItems(){
 void addToOrderOrDelete(int totalProductInCart){
 
     br;
-    char userAns;
+    fflush(stdin);
     printf("Choose service (A.Order/B.Delete/C.Back): ");
+    char userAns;
     scanf(" %c", &userAns);
+
+    br;
 
 
     if(userAns == 'C' || userAns == 'c'){
@@ -175,8 +178,10 @@ void addToOrderOrDelete(int totalProductInCart){
 void go_back(){
 
     printf("Go A.back : ");
+
     char userAns;
     scanf(" %c", &userAns);
+    printf("\n");
 
     if(userAns == 'a' || userAns == 'A'){
         displayHeader();
