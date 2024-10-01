@@ -7,7 +7,7 @@ void showDashBoard();
 void Go_back();
 void totalNumberOfCustomer();
 void totalNumberOfProduct();
-void totalNumberOfOrder();
+void totalAllOrder();
 
 
 

@@ -43,7 +43,7 @@ void displayHeader(){
     }else{
         printf("D.Cart  ");
     }
-    if(alreadyLogin){
+    if(alreadyLogin && !isAdmin){
 
         printf("E.MyOrder  ");
     }
@@ -133,7 +133,7 @@ void chooseService(int isAdmin) {
         showAllCartItems();// from-> Cart/Add to cart/ cart.h
 
     }else if(userAnswer == 'c' || userAnswer == 'C'){
-        searchProduct();// from-> Cart/Add to cart/ cart.h
+        searchingPage();// from-> Cart/Add to cart/ cart.h
 
     }else if(!alreadyLogin && (userAnswer =='E' || userAnswer == 'e')){
         typeOfUserForRegister();

@@ -81,7 +81,10 @@ int addToOrderList(char itemName[], int itemPrice, int itemQuantity) {
         if (strcmp(userGmail, user.gmail) == 0) {
             int totalProductInOrderList = user.totalItemToOrder;
 
+            // testing
+            printf("%d %d\n", itemQuantity, itemPrice);
             // Add product to the order list
+
             strcpy(user.myOrder[totalProductInOrderList].productName, itemName);
             user.myOrder[totalProductInOrderList].totalPrice = itemPrice * itemQuantity;
             user.myOrder[totalProductInOrderList].quantity = itemQuantity;
